@@ -75,12 +75,13 @@ const WhatsApp = () => (
   </svg>
 );
 
-// Logo de MercadoPago
+// Logo de MercadoPago - Usando imagen externa
 const MercadoPagoLogo = ({ className = "w-8 h-8" }: { className?: string }) => (
-  <svg className={className} viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect width="48" height="48" rx="8" fill="#00BCFF"/>
-    <path d="M24 12C17.373 12 12 17.373 12 24C12 30.627 17.373 36 24 36C30.627 36 36 30.627 36 24C36 17.373 30.627 12 24 12ZM28.8 28.8H19.2V19.2H28.8V28.8Z" fill="white"/>
-  </svg>
+  <img
+    src="https://ext.same-assets.com/3655081281/1835882238.png"
+    alt="Mercado Pago"
+    className={className}
+  />
 );
 
 const Loader = () => (
