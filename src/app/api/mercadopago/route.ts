@@ -2,9 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { MercadoPagoConfig, Preference } from "mercadopago";
 
 // Inicializar MercadoPago con el access token
-// IMPORTANTE: En producción, usar variable de entorno MERCADOPAGO_ACCESS_TOKEN
 const client = new MercadoPagoConfig({
-  accessToken: process.env.MERCADOPAGO_ACCESS_TOKEN || "TEST-xxx-xxx-xxx-xxx",
+  accessToken: process.env.MERCADOPAGO_ACCESS_TOKEN!,
 });
 
 export async function POST(request: NextRequest) {
@@ -12,9 +11,12 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const { hours, totalPrice } = body;
 
-    if (!hours || !totalPrice) {
+    const price = Number(totalPrice);
+
+    // ✅ Validación correcta
+    if (!hours || !price || isNaN(price)) {
       return NextResponse.json(
-        { error: "Faltan parámetros requeridos" },
+        { error: "Parámetros inválidos" },
         { status: 400 }
       );
     }
@@ -27,16 +29,17 @@ export async function POST(request: NextRequest) {
           {
             id: "devops-hours",
             title: `Servicio DevOps - ${hours} hora(s)`,
-            description: "Consultoría DevOps especializada, CI/CD, Infraestructura Cloud",
+            description:
+              "Consultoría DevOps especializada, CI/CD, Infraestructura Cloud",
             quantity: 1,
-            unit_price: totalPrice,
+            unit_price: price, // ✅ NUMBER
             currency_id: "COP",
           },
         ],
         back_urls: {
-          success: `${process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"}?status=success`,
-          failure: `${process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"}?status=failure`,
-          pending: `${process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"}?status=pending`,
+          success: `${process.env.NEXT_PUBLIC_BASE_URL}?status=success`,
+          failure: `${process.env.NEXT_PUBLIC_BASE_URL}?status=failure`,
+          pending: `${process.env.NEXT_PUBLIC_BASE_URL}?status=pending`,
         },
         auto_return: "approved",
         statement_descriptor: "DevOpsPro",
@@ -47,7 +50,6 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({
       id: preferenceData.id,
       init_point: preferenceData.init_point,
-      sandbox_init_point: preferenceData.sandbox_init_point,
     });
   } catch (error) {
     console.error("Error creando preferencia de MercadoPago:", error);
@@ -57,3 +59,4 @@ export async function POST(request: NextRequest) {
     );
   }
 }
+``
