@@ -30,7 +30,7 @@ export async function POST(request: NextRequest) {
             description: "Consultoría DevOps especializada, CI/CD, Infraestructura Cloud",
             quantity: 1,
             unit_price: totalPrice,
-            currency_id: "USD",
+            currency_id: "COP",
           },
         ],
         back_urls: {

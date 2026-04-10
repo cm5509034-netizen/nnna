@@ -3,37 +3,27 @@
 ## Estado Actual
 - [x] Repositorio clonado desde GitHub
 - [x] Landing page funcional con Next.js + shadcn/ui
-- [x] Logo de MercadoPago actualizado (solo en sección de pagos)
-- [x] Archivos de configuración para credenciales creados
+- [x] Logo de MercadoPago actualizado
+- [x] Credenciales de MercadoPago configuradas (PRODUCCIÓN)
+- [x] Moneda cambiada a COP (pesos colombianos)
+- [x] Precio: $60,000 COP por hora
 
-## Configuración de MercadoPago
+## Configuración de MercadoPago ✅
 
-### Pasos para habilitar pagos reales:
+### Credenciales configuradas:
+- **Access Token**: APP_USR-xxxx (producción)
+- **Moneda**: COP (Pesos Colombianos)
+- **Archivo**: `.env.local`
 
-1. **Crear cuenta de desarrollador**
-   - Ir a: https://www.mercadopago.com.co/developers/panel
-   - Iniciar sesión o crear cuenta
-
-2. **Crear una aplicación**
-   - En el panel, hacer clic en "Crear aplicación"
-   - Nombre: "DevOps Pro" (o el nombre que desees)
-   - Seleccionar: "Pagos online" > "Checkout Pro"
-
-3. **Obtener credenciales**
-   - En tu aplicación, ir a "Credenciales"
-   - Para PRUEBAS: Usar "Credenciales de prueba" (Access Token comienza con TEST-)
-   - Para PRODUCCIÓN: Usar "Credenciales de producción" (Access Token comienza con APP_USR-)
-
-4. **Configurar variables de entorno**
-   - Editar el archivo `.env.local`
-   - Reemplazar `TU_ACCESS_TOKEN_AQUI` con tu Access Token real
-
-### Archivos creados:
-- `.env.example` - Ejemplo de configuración (seguro para Git)
-- `.env.local` - Configuración real (NO se sube a Git)
+### Flujo de pago:
+1. Usuario selecciona horas
+2. Click en "Pagar con Mercado Pago"
+3. Redirección al checkout de MercadoPago
+4. Pago procesado
+5. Redirección de vuelta con status
 
 ## Pendiente
-- [ ] Agregar credenciales reales de MercadoPago
-- [ ] Probar flujo de pago en sandbox
-- [ ] Configurar webhooks para notificaciones
-- [ ] Desplegar en producción
+- [ ] Probar flujo de pago completo
+- [ ] Configurar webhooks para notificaciones (opcional)
+- [ ] Desplegar en producción (Netlify)
+- [ ] Actualizar NEXT_PUBLIC_BASE_URL con URL de producción

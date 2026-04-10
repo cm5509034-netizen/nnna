@@ -97,7 +97,7 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(false);
   const [paymentStatus, setPaymentStatus] = useState<string | null>(null);
 
-  const PRICE_PER_HOUR = 15;
+  const PRICE_PER_HOUR = 60000;
   const totalPrice = hours * PRICE_PER_HOUR;
 
   // Marcar como montado y verificar status de pago
@@ -166,7 +166,7 @@ export default function Home() {
   };
 
   const handleContactWhatsApp = () => {
-    const message = `Hola, quiero contratar ${hours} hora(s) de servicio DevOps por un total de $${totalPrice} USD.`;
+    const message = `Hola, quiero contratar ${hours} hora(s) de servicio DevOps por un total de ${totalPrice.toLocaleString('es-CO')} COP.`;
     window.open(`https://wa.me/573114366027?text=${encodeURIComponent(message)}`, '_blank');
   };
 
@@ -415,8 +415,8 @@ export default function Home() {
             {/* Price Display */}
             <div className="text-center mb-8">
               <div className="flex items-baseline justify-center gap-2">
-                <span className="text-6xl font-bold text-gradient-cyan">${PRICE_PER_HOUR}</span>
-                <span className="text-2xl text-muted-foreground">USD/hora</span>
+                <span className="text-5xl font-bold text-gradient-cyan">${PRICE_PER_HOUR.toLocaleString('es-CO')}</span>
+                <span className="text-2xl text-muted-foreground">COP/hora</span>
               </div>
             </div>
 
@@ -461,8 +461,8 @@ export default function Home() {
             {/* Total Calculation */}
             <div className="bg-secondary/30 rounded-xl p-6 mb-8">
               <div className="flex justify-between items-center text-lg">
-                <span className="text-muted-foreground">{hours} hora(s) x ${PRICE_PER_HOUR} USD</span>
-                <span className="text-2xl font-bold text-gradient-cyan">${totalPrice} USD</span>
+                <span className="text-muted-foreground">{hours} hora(s) x ${PRICE_PER_HOUR.toLocaleString('es-CO')} COP</span>
+                <span className="text-2xl font-bold text-gradient-cyan">${totalPrice.toLocaleString('es-CO')} COP</span>
               </div>
             </div>
 
